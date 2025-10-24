@@ -51,3 +51,14 @@ switch ($route) {
             "description" => "Obtiene lista de cursos disponibles"
         ]);
         break;
+
+    case "courses":
+        echo json_encode([
+            "success" => true,
+            "data" => [
+                ["id" => 1, "name" => "Matemáticas", "teacher_id" => 1]
+            ],
+            "endpoint" => "GET /api/courses",
+            "description" => "Obtiene lista de cursos"
+        ]);
+        break;
