@@ -11,49 +11,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
-      - name: Generate Documentation
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          
+      - name: Generate Documentation from Code
         run: |
-          echo "📚 Generando documentación automática..."
-          
-          # Crear documentación HTML
-          mkdir -p docs-output
-          
-          cat > docs-output/index.html << 'EOF'
-          <!DOCTYPE html>
-          <html>
-          <head>
-              <title>Documentación API - Bit Technologies</title>
-              <style>
-                  body { font-family: Arial, sans-serif; margin: 40px; }
-                  .endpoint { background: #f8f9fa; padding: 15px; margin: 10px 0; border-radius: 5px; }
-                  .method { background: #28a745; color: white; padding: 3px 8px; border-radius: 3px; }
-              </style>
-          </head>
-          <body>
-              <h1>📚 API Documentation</h1>
-              <p><strong>Generada automáticamente:</strong> $(date)</p>
-              
-              <div class="endpoint">
-                  <h3><span class="method">GET</span> /api/?route=students</h3>
-                  <p>Obtiene lista de estudiantes del sistema</p>
-                  <strong>Respuesta:</strong>
-                  <pre>{"success": true, "data": [{"id": 1, "name": "Juan Pérez", "grade": 5}]}</pre>
-              </div>
-              
-              <div class="endpoint">
-                  <h3><span class="method">GET</span> /api/?route=teachers</h3>
-                  <p>Obtiene lista de profesores del sistema</p>
-                  <strong>Respuesta:</strong>
-                  <pre>{"success": true, "data": [{"id": 1, "name": "Prof. García", "subject": "Matemáticas"}]}</pre>
-              </div>
-              
-              <hr>
-              <p><em>Esta documentación se actualiza automáticamente cada vez que se hace merge a main.</em></p>
-          </body>
-          </html>
-          EOF
-          
-          echo "✅ Documentación generada en docs-output/"
+          echo "📚 Generando documentación desde código fuente..."
+          php generate-docs.php
       
       - name: Upload Documentation
         uses: actions/upload-artifact@v4
