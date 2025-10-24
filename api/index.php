@@ -40,3 +40,14 @@ switch ($route) {
             'generated_at' => date('Y-m-d H:i:s')
         ]);
 }
+    case "courses":
+        echo json_encode([
+            "success" => true,
+            "data" => [
+                ["id" => 1, "name" => "Matemáticas", "teacher_id" => 1],
+                ["id" => 2, "name" => "Historia", "teacher_id" => 2]
+            ],
+            "endpoint" => "GET /api/courses",
+            "description" => "Obtiene lista de cursos disponibles"
+        ]);
+        break;
